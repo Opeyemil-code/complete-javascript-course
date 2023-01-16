@@ -41,7 +41,7 @@ body {
   color: #333;
   cursor: pointer;
   border: none;
-  background: none;
+  background: yellow;
 }
 
 h1 {
@@ -83,3 +83,4 @@ p {
   backdrop-filter: blur(3px);
   z-index: 5;
 }
+
