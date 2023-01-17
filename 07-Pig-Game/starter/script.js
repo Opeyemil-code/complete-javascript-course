@@ -23,10 +23,19 @@ const player1Sec = document.querySelector('.player--1')
  let currentscore = 0;
  let activePlayer = 0;
 
+//Rolling dice functionality
 
- //Rolling dice functionality
+function switchplayer(params) {
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+     activePlayer = activePlayer === 0 ? 1 : 0;
+     currentscore = 0;
+     player0sec.classList.toggle('player--active')
+     player1Sec.classList.toggle('player--active')
+}
+
 
  function diceRoll(params) {
+    console.log('agba')
    //generating a random dice roll
    const dice = Math.trunc(Math.random() * 6 ) + 1;
    // Display dice
@@ -39,23 +48,40 @@ const player1Sec = document.querySelector('.player--1')
       document.getElementById(`current--${activePlayer}`).textContent = currentscore;
    } else {
      //switch player
-     document.getElementById(`current--${activePlayer}`).textContent = 0;
-     activePlayer = activePlayer === 0 ? 1 : 0;
-     currentscore = 0;
-     player0sec.classList.toggle('player--active')
-     player1Sec.classList.toggle('player--active')    
+     switchplayer()    
  }
 
   
  }
 
-
-
- 
-
-
  btnRoll.addEventListener(
     'click', diceRoll
+ )
+
+
+
+ //BUTTON HOLD FUNCTIONASSLITY
+
+ function buttonHold(params) {
+    //. add current score to active player
+    scores[activePlayer] += currentscore;
+    // scores[1] = scores[1] + currentScore
+    document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+    
+    //check if score is already 100 >=
+    if (score[activePlayer] >= 20) {
+       document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
+       document.querySelector(`.player--${activePlayer}`).classList.remove('player--winner') 
+    } else {
+        //switch to next player
+   switchplayer()
+    }
+      
+ }
+
+
+ btnHold.addEventListener(
+    'click', buttonHold
  )
 
 
